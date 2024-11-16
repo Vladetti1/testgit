@@ -1,18 +1,21 @@
 #include <iostream>
 
-// Функция возведения в степень через цикл
-double my_pow(double base, unsigned int exponent) {
+// Функция возведения в степень через цикл с поддержкой отрицательных степеней
+double my_pow(double base, int exponent) {
     double result = 1.0;
-    for (unsigned int i = 0; i < exponent; ++i) {
+    int positive_exponent = exponent < 0 ? -exponent : exponent;
+
+    for (int i = 0; i < positive_exponent; ++i) {
         result *= base;
     }
-    return result;
+
+    return exponent < 0 ? 1.0 / result : result;
 }
 
 // Для проверки работы функции
 int main() {
     double base;
-    unsigned int exponent;
+    int exponent;
 
     std::cout << "Enter a base: ";
     std::cin >> base;
@@ -24,3 +27,4 @@ int main() {
 
     return 0;
 }
+
