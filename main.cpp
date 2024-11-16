@@ -1,6 +1,19 @@
 #include <iostream>
 
-// Функция возведения в степень через цикл с поддержкой отрицательных степеней
+// Функция быстрого возведения в степень
+double fast_pow(double base, unsigned int exponent) {
+    double result = 1.0;
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
+            result *= base; // Умножаем на текущую степень, если показатель нечетный
+        }
+        base *= base;      // Увеличиваем степень основания
+        exponent /= 2;     // Делим показатель пополам
+    }
+    return result;
+}
+
+// Функция возведения в степень с поддержкой отрицательных степеней
 double my_pow(double base, int exponent) {
     double result = 1.0;
     int positive_exponent = exponent < 0 ? -exponent : exponent;
@@ -12,7 +25,7 @@ double my_pow(double base, int exponent) {
     return exponent < 0 ? 1.0 / result : result;
 }
 
-// Для проверки работы функции
+// Для проверки работы функций
 int main() {
     double base;
     int exponent;
@@ -23,7 +36,7 @@ int main() {
     std::cin >> exponent;
 
     std::cout << base << " raised to the power of " << exponent
-              << " is " << my_pow(base, exponent) << std::endl;
+              << " is " << my_pow(base, exponent) << std::endl; // Вызываем my_pow
 
     return 0;
 }
